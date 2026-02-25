@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wholesome Streamer OnlyFans</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .video-background iframe {
+            width: 100vw;
+            height: 56.25vw; /* 16:9 aspect ratio */
+            min-height: 100vh;
+            min-width: 177.77vh; /* Maintain aspect ratio */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        .eggplant {
+            font-size: 200px; /* Giant eggplant */
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .message {
+            font-size: 48px;
+            animation: flash 1s infinite;
+        }
+        @keyframes flash {
+            0% { color: red; }
+            50% { color: yellow; }
+            100% { color: red; }
+        }
+        .fake-button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 24px;
+            background-color: #ff69b4;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .fake-button:hover {
+            background-color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1&playlist=dQw4w9WgXcQ&mute=0&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="content">
+        <p class="message">This streamer is TOO WHOLESOME for OnlyFans!</p>
+        <p class="eggplant">🍆</p>
+        <button class="fake-button" onclick="alert('Trolled! No OnlyFans here. Go watch some wholesome Twitch streams instead!')">Subscribe Now</button>
+    </div>
+    <script>
+        // Optional extra troll: Random alert after 5 seconds
+        setTimeout(() => {
+            alert("You've been Rick Rolled! 😎");
+        }, 5000);
+    </script>
+</body>
+</html>
