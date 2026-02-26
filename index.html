@@ -206,7 +206,7 @@
             0% { background-color: #000; }
             100% { background-color: #111; }
         }
-        /* Small non-blocking prompt for sound */
+        /* Small non-blocking sound prompt */
         #sound-prompt {
             position: fixed;
             bottom: 100px;
@@ -321,25 +321,25 @@
         </div>
     </div>
 
+    <!-- Invisible audio for Rick Roll sound loop -->
+    <audio id="rick-audio" autoplay loop>
+        <source src="https://files.catbox.moe/abc123.mp3" type="audio/mpeg"> <!-- Replace with actual MP3 URL -->
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
-        // Sound activation on first interaction (click/touch/scroll/key)
-        let hasInteracted = false;
-        const interactionEvents = ['click', 'touchstart', 'keydown', 'scroll'];
-        interactionEvents.forEach(event => {
-            document.addEventListener(event, function handleInteraction() {
-                if (!hasInteracted) {
-                    hasInteracted = true;
-                    const video = document.getElementById('rick-video');
-                    video.muted = false;
-                    video.play().catch(e => console.log("Play failed:", e));
-                    // Fade out prompt
-                    const prompt = document.getElementById('sound-prompt');
-                    if (prompt) prompt.style.opacity = '0';
-                    setTimeout(() => { if (prompt) prompt.remove(); }, 1000);
-                    // Remove listeners after first interaction
-                    interactionEvents.forEach(ev => document.removeEventListener(ev, handleInteraction));
-                }
-            }, { passive: true });
+        // Rick Roll audio (direct MP3 for reliable sound)
+        const audio = document.getElementById('rick-audio');
+        audio.volume = 0.4; // Not too loud
+
+        // Attempt autoplay sound
+        audio.play().catch(() => {
+            // On first interaction if blocked
+            document.addEventListener('click', () => {
+                audio.play().catch(e => console.log("Audio play failed:", e));
+                document.getElementById('sound-prompt').style.opacity = '0';
+                setTimeout(() => document.getElementById('sound-prompt').remove(), 1000);
+            }, { once: true });
         });
 
         function startTrolls() {
