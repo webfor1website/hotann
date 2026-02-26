@@ -206,32 +206,31 @@
             0% { background-color: #000; }
             100% { background-color: #111; }
         }
-        /* Small prompt text for unmute */
-        #unmute-prompt {
+        /* Small non-blocking prompt for sound */
+        #sound-prompt {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 100px;
+            right: 20px;
             background: rgba(0, 0, 0, 0.7);
             color: #ff0000;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 20px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 18px;
             font-weight: bold;
-            z-index: 100;
+            z-index: 5;
             pointer-events: none;
-            animation: fadeOutPrompt 5s forwards;
+            animation: fadeOutPrompt 8s forwards;
         }
         @keyframes fadeOutPrompt {
             0% { opacity: 1; }
-            80% { opacity: 1; }
+            70% { opacity: 1; }
             100% { opacity: 0; }
         }
     </style>
 </head>
 <body onload="startTrolls();">
-    <!-- Small unmute prompt (fades out) -->
-    <div id="unmute-prompt">CLICK ANYWHERE FOR SOUND! 🎧</div>
+    <!-- Small sound prompt (fades out) -->
+    <div id="sound-prompt">Click page for Rick Roll sound! 🎧</div>
 
     <div class="sidebar">
         <h3>Current Temps (Feb 25, 2026)</h3>
@@ -323,20 +322,25 @@
     </div>
 
     <script>
-        // Rick Roll sound on first interaction
+        // Sound activation on first interaction (click/touch/scroll/key)
         let hasInteracted = false;
-        document.addEventListener('click', function handleFirstClick() {
-            if (!hasInteracted) {
-                hasInteracted = true;
-                const video = document.getElementById('rick-video');
-                video.muted = false;
-                video.play().catch(e => console.log("Play failed:", e));
-                // Fade out prompt
-                const prompt = document.getElementById('unmute-prompt');
-                if (prompt) prompt.style.opacity = '0';
-                setTimeout(() => { if (prompt) prompt.remove(); }, 1000);
-            }
-        }, { once: false }); // Allow multiple clicks if needed
+        const interactionEvents = ['click', 'touchstart', 'keydown', 'scroll'];
+        interactionEvents.forEach(event => {
+            document.addEventListener(event, function handleInteraction() {
+                if (!hasInteracted) {
+                    hasInteracted = true;
+                    const video = document.getElementById('rick-video');
+                    video.muted = false;
+                    video.play().catch(e => console.log("Play failed:", e));
+                    // Fade out prompt
+                    const prompt = document.getElementById('sound-prompt');
+                    if (prompt) prompt.style.opacity = '0';
+                    setTimeout(() => { if (prompt) prompt.remove(); }, 1000);
+                    // Remove listeners after first interaction
+                    interactionEvents.forEach(ev => document.removeEventListener(ev, handleInteraction));
+                }
+            }, { passive: true });
+        });
 
         function startTrolls() {
             startConfetti();
@@ -346,7 +350,7 @@
             startColorInvert();
         }
 
-        // Cursor trail of eggplants/bananas
+        // Cursor trail
         function startCursorTrail() {
             document.addEventListener('mousemove', (e) => {
                 const trail = document.createElement('div');
@@ -361,7 +365,7 @@
             });
         }
 
-        // Random fake error popups (fun, not mean)
+        // Fake error popups (fun only)
         function startFakeError() {
             const errors = [
                 "ERROR 420: Too much chill detected 🌿",
@@ -375,7 +379,7 @@
             }, 18000);
         }
 
-        // Confetti explosion
+        // Confetti
         function startConfetti() {
             const container = document.getElementById('confetti');
             for (let i = 0; i < 300; i++) {
@@ -389,7 +393,7 @@
             }
         }
 
-        // Page shake troll
+        // Page shake
         function startPageShake() {
             setInterval(() => {
                 document.body.style.animation = 'shake 0.6s';
@@ -400,7 +404,7 @@
         shakeStyle.textContent = `@keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-12px); } 20%, 40%, 60%, 80% { transform: translateX(12px); } }`;
         document.head.appendChild(shakeStyle);
 
-        // Color invert troll
+        // Color invert
         function startColorInvert() {
             setInterval(() => {
                 document.body.style.filter = 'invert(1) hue-rotate(180deg)';
