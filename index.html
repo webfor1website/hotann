@@ -170,18 +170,45 @@
             0% { background-color: #000; }
             100% { background-color: #111; }
         }
+        /* Unmute overlay */
+        #unmute-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            color: #ff0000;
+            font-size: 60px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
     </style>
 </head>
-<body onload="startTrolls(); forceRickPlay();">
+<body onload="startTrolls();">
+    <!-- Unmute overlay for Rick Roll -->
+    <div id="unmute-overlay" onclick="unmuteRick()">CLICK ANYWHERE TO UNMUTE RICK ROLL & START THE PARTY 😈</div>
+
     <div class="video-background">
-        <iframe id="rick-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1&playlist=dQw4w9WgXcQ&mute=0&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="rick-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1&playlist=dQw4w9WgXcQ&mute=1&controls=0&showinfo=0&rel=0&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <div class="content">
         <p class="message">This streamer is TOO WHOLESOME for OnlyFans!</p>
         <p class="eggplant">🍆</p>
         <button class="fake-button" onclick="alert('Trolled! No OnlyFans here. Go watch some wholesome Twitch streams instead!')">Subscribe Now</button>
     </div>
-    <!-- Flying troll items -->
+    <!-- Flying troll items (no Star Wars) -->
     <div class="flying-elements">
         <div class="flying-item" style="top:10%;left:15%;animation-duration:14s;">🍌🍌🍌</div>
         <div class="flying-item" style="top:25%;left:40%;animation-duration:11s;">🐐 MEEEEEH</div>
@@ -246,15 +273,25 @@
             const video = document.getElementById('rick-video');
             video.muted = false;
             video.play().catch(() => {
-                // If blocked, play on first interaction
-                document.addEventListener('click', () => {
-                    video.play();
+                // Wait for user interaction if blocked
+                document.body.addEventListener('click', function playOnClick() {
                     video.muted = false;
+                    video.play();
+                    document.getElementById('unmute-overlay').style.display = 'none';
+                    document.body.removeEventListener('click', playOnClick);
                 }, { once: true });
             });
         }
 
+        function unmuteRick() {
+            const video = document.getElementById('rick-video');
+            video.muted = false;
+            video.play();
+            document.getElementById('unmute-overlay').style.display = 'none';
+        }
+
         function startTrolls() {
+            forceRickPlay(); // Attempt autoplay with sound
             startConfetti();
             startCursorTrail();
             startFakeError();
@@ -262,7 +299,7 @@
             startColorInvert();
         }
 
-        // Cursor trail of eggplants
+        // Cursor trail of eggplants/bananas
         function startCursorTrail() {
             document.addEventListener('mousemove', (e) => {
                 const trail = document.createElement('div');
@@ -277,10 +314,17 @@
             });
         }
 
-        // Random fake error popups
+        // Random fake error popups (no mom references)
         function startFakeError() {
             setInterval(() => {
-                alert('CRITICAL ERROR: Your mom just called... she says hi 😈');
+                const errors = [
+                    "ERROR 69: Too much aura detected 😈",
+                    "WARNING: Your vibes are off the charts!",
+                    "CRITICAL: Skill issue detected 😂",
+                    "ALERT: You're being ratio'd right now",
+                    "SYSTEM: Touch grass immediately or else 🍃"
+                ];
+                alert(errors[Math.floor(Math.random() * errors.length)]);
             }, 18000);
         }
 
