@@ -213,7 +213,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -224,20 +224,38 @@
             text-align: center;
             cursor: pointer;
             animation: pulse 2s infinite;
+            pointer-events: auto; /* Allow clicks on overlay */
+        }
+        #unmute-overlay button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff4444;
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
         }
         @keyframes pulse {
             0% { opacity: 0.6; }
             50% { opacity: 1; }
             100% { opacity: 0.6; }
         }
+        /* Fade out animation for cursor trail */
+        @keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; transform: translateY(-50px); } }
     </style>
 </head>
 <body onload="startTrolls();">
-    <!-- Unmute overlay for Rick Roll -->
-    <div id="unmute-overlay" onclick="unmuteRick()">CLICK ANYWHERE TO UNMUTE RICK ROLL & START THE TROLL 😈</div>
+    <!-- Unmute overlay -->
+    <div id="unmute-overlay">
+        CLICK ANYWHERE TO UNMUTE RICK ROLL & START THE TROLL 😈
+        <button onclick="document.getElementById('unmute-overlay').style.display='none'">X</button>
+    </div>
 
     <div class="sidebar">
-        <h3>Current Temps</h3>
+        <h3>Current Temps (Feb 25, 2026)</h3>
         <p class="temp">New York: 38°F / 3°C</p>
         <p class="temp">Chicago: 32°F / 0°C</p>
         <p class="temp">Los Angeles: 68°F / 20°C</p>
@@ -343,7 +361,7 @@
             startColorInvert();
         }
 
-        // Cursor trail
+        // Cursor trail of eggplants/bananas
         function startCursorTrail() {
             document.addEventListener('mousemove', (e) => {
                 const trail = document.createElement('div');
@@ -358,7 +376,7 @@
             });
         }
 
-        // Fake error popups (fun, not mean)
+        // Random fake error popups (fun, not mean)
         function startFakeError() {
             const errors = [
                 "ERROR 420: Too much chill detected 🌿",
@@ -372,7 +390,7 @@
             }, 18000);
         }
 
-        // Confetti
+        // Confetti explosion
         function startConfetti() {
             const container = document.getElementById('confetti');
             for (let i = 0; i < 300; i++) {
@@ -386,7 +404,7 @@
             }
         }
 
-        // Page shake
+        // Page shake troll
         function startPageShake() {
             setInterval(() => {
                 document.body.style.animation = 'shake 0.6s';
@@ -397,7 +415,7 @@
         shakeStyle.textContent = `@keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-12px); } 20%, 40%, 60%, 80% { transform: translateX(12px); } }`;
         document.head.appendChild(shakeStyle);
 
-        // Color invert
+        // Color invert troll
         function startColorInvert() {
             setInterval(() => {
                 document.body.style.filter = 'invert(1) hue-rotate(180deg)';
