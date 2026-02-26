@@ -213,7 +213,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -221,14 +221,15 @@
             cursor: pointer;
         }
         #click-prompt {
-            background: linear-gradient(135deg, #ff0000, #ff69b4);
-            padding: 40px 60px;
-            border-radius: 20px;
-            font-size: 32px;
+            background: linear-gradient(135deg, #ff0000, #ff69b4, #ff8c00);
+            padding: 50px 70px;
+            border-radius: 25px;
+            font-size: 36px;
             font-weight: bold;
             color: white;
             animation: pulse-scale 1.5s infinite;
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+            box-shadow: 0 0 60px rgba(255, 0, 0, 0.9);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         @keyframes pulse-scale {
             0%, 100% { transform: scale(1); }
@@ -240,13 +241,13 @@
     <!-- Click to start overlay -->
     <div id="click-overlay" onclick="startEverything()">
         <div id="click-prompt">
-            🎵 CLICK ANYWHERE TO START 🎵
+            🎵 CLICK ANYWHERE TO START THE PARTY 🎵
         </div>
     </div>
 
-    <!-- Hidden audio element with Rick Roll -->
-    <audio id="rick-audio" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <!-- Hidden audio element with ACTUAL Rick Roll -->
+    <audio id="rick-audio" loop preload="auto">
+        <source src="https://ia800304.us.archive.org/34/items/NeverGonnaGiveYouUp/jocofullinterview41.mp3" type="audio/mpeg">
     </audio>
 
     <div class="sidebar">
@@ -338,20 +339,22 @@
 
     <script>
         function startEverything() {
-            // Remove overlay
-            document.getElementById('click-overlay').style.display = 'none';
+            // Remove overlay immediately
+            const overlay = document.getElementById('click-overlay');
+            overlay.style.display = 'none';
             
-            // Start Rick Roll audio
+            // Start Rick Roll audio LOUD AND CLEAR
             const audio = document.getElementById('rick-audio');
-            audio.volume = 0.7;
-            audio.play().catch(e => {
-                console.log("Audio blocked:", e);
-                // Try alternative Rick Roll source if first fails
-                audio.src = "https://cdn.jsdelivr.net/gh/fent/node-ytdl-core@master/test/files/video.m4a";
-                audio.play();
+            audio.volume = 0.8; // Nice and loud
+            audio.play().then(() => {
+                console.log("🎵 Rick Roll playing successfully!");
+            }).catch(e => {
+                console.log("Audio error:", e);
+                // Fallback: try again after a tiny delay
+                setTimeout(() => audio.play(), 100);
             });
             
-            // Start all troll effects
+            // Start all the chaos
             startTrolls();
         }
 
@@ -385,7 +388,10 @@
                 "WARNING: Aura levels critical! 😎",
                 "ALERT: Your vibes are unmatched 🔥",
                 "SYSTEM: Ratio incoming... L + bozo",
-                "CRITICAL: Touch grass protocol activated 🏞️"
+                "CRITICAL: Touch grass protocol activated 🏞️",
+                "ERROR 69: Nice... but also cringe 🤨",
+                "WARNING: Main character energy overload ⚡",
+                "ALERT: No cap detected fr fr 💯"
             ];
             setInterval(() => {
                 alert(errors[Math.floor(Math.random() * errors.length)]);
@@ -411,8 +417,13 @@
                 setTimeout(() => document.body.style.animation = '', 600);
             }, 12000);
         }
+        
         const shakeStyle = document.createElement('style');
-        shakeStyle.textContent = `@keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-12px); } 20%, 40%, 60%, 80% { transform: translateX(12px); } }`;
+        shakeStyle.textContent = `@keyframes shake { 
+            0%, 100% { transform: translateX(0); } 
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-12px); } 
+            20%, 40%, 60%, 80% { transform: translateX(12px); } 
+        }`;
         document.head.appendChild(shakeStyle);
 
         function startColorInvert() {
@@ -423,7 +434,10 @@
         }
 
         const fadeStyle = document.createElement('style');
-        fadeStyle.textContent = `@keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; transform: translateY(-50px); } }`;
+        fadeStyle.textContent = `@keyframes fadeOut { 
+            0% { opacity: 1; } 
+            100% { opacity: 0; transform: translateY(-50px); } 
+        }`;
         document.head.appendChild(fadeStyle);
     </script>
 </body>
