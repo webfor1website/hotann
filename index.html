@@ -13,6 +13,7 @@
             color: #fff;
             font-family: Arial, sans-serif;
             text-align: center;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="20" dx="0" font-size="20">🍆</text></svg>'), auto; /* Custom eggplant cursor for extra troll */
         }
         .video-background {
             position: fixed;
@@ -70,19 +71,298 @@
         .fake-button:hover {
             background-color: #ff1493;
         }
+        /* Flying elements container */
+        .flying-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* Don't block clicks */
+            z-index: 0;
+            overflow: hidden;
+        }
+        .flying-item {
+            position: absolute;
+            font-size: 50px;
+            animation: float-rotate 10s linear infinite;
+            white-space: nowrap;
+        }
+        @keyframes float-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Fake loading bar */
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            background-color: #ff0000;
+            animation: fake-load 5s linear infinite;
+            z-index: 10;
+        }
+        @keyframes fake-load {
+            0% { width: 0%; }
+            90% { width: 95%; }
+            100% { width: 95%; }
+        }
+        /* Confetti explosion */
+        .confetti {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 30px;
+            background: #ffd300;
+            opacity: 0;
+        }
+        .confetti-piece:nth-child(odd) { background: #7430f6; }
+        .confetti-piece:nth-child(even) { background: #ff3e03; }
+        .confetti-piece:nth-child(4n) { background: #0dbeff; }
+        /* Hover text change */
+        .hover-change:hover::before {
+            content: "NO WAY!";
+            display: block;
+            font-size: 24px;
+            color: #ff0000;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* Background flashing */
+        @keyframes bg-flash {
+            0%, 100% { background-color: #000; }
+            50% { background-color: #111; }
+        }
+        body {
+            animation: bg-flash 0.5s infinite alternate;
+        }
+        /* Random page reload (troll 5) */
+        /* This is implemented in script */
+        /* Links section */
+        .links-section {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .link-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 40px; /* Icon size */
+            transition: all 0.3s ease;
+        }
+        .link-icon:hover {
+            transform: rotate(360deg) scale(1.5);
+            filter: drop-shadow(0 0 10px #ff69b4);
+        }
+        .link-label {
+            margin-top: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
     </style>
 </head>
-<body>
+<body onload="startTrolls();">
     <div class="video-background">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1&playlist=dQw4w9WgXcQ&mute=0&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="rick-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1&playlist=dQw4w9WgXcQ&mute=0&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <div class="content">
         <p class="message">This streamer is TOO WHOLESOME for OnlyFans!</p>
         <p class="eggplant">🍆</p>
-        <button class="fake-button" onclick="alert('Trolled! No OnlyFans here. Go watch some wholesome Twitch streams instead!')">Subscribe Now</button>
+        <button class="fake-button hover-change" onclick="alert('Trolled! No OnlyFans here. Go watch some wholesome Twitch streams instead!')">Subscribe Now</button>
+    </div>
+    <!-- Flying elements -->
+    <div class="flying-elements">
+        <!-- Eggplants / Dicks -->
+        <div class="flying-item" style="top: 10%; left: 20%; animation-duration: 15s;">🍆</div>
+        <div class="flying-item" style="top: 30%; left: 50%; animation-duration: 12s;">🍆</div>
+        <div class="flying-item" style="top: 50%; left: 80%; animation-duration: 18s;">🍆</div>
+        <div class="flying-item" style="top: 70%; left: 30%; animation-duration: 14s;">🍆</div>
+        <div class="flying-item" style="top: 90%; left: 60%; animation-duration: 16s;">🍆</div>
+        <!-- Star Wars characters (using emojis or text as placeholders; replace with images if needed) -->
+        <div class="flying-item" style="top: 20%; left: 10%; animation-duration: 20s;">🚀 X-Wing</div>
+        <div class="flying-item" style="top: 40%; left: 70%; animation-duration: 17s;">🛸 TIE Fighter</div>
+        <div class="flying-item" style="top: 60%; left: 40%; animation-duration: 19s;">🌌 Millennium Falcon</div>
+        <div class="flying-item" style="top: 80%; left: 90%; animation-duration: 13s;">⚔️ Lightsaber</div>
+        <div class="flying-item" style="top: 15%; left: 55%; animation-duration: 22s;">🤖 R2-D2</div>
+    </div>
+    <!-- Fake loading bar -->
+    <div class="loading-bar"></div>
+    <!-- Confetti container -->
+    <div class="confetti" id="confetti"></div>
+    <!-- Links section -->
+    <div class="links-section">
+        <a href="https://streamelements.com/hot_ann_streamy/tip" class="link-icon">
+            <span>💸</span>
+            <span class="link-label">Tip</span>
+        </a>
+        <a href="https://www.twitch.tv/hot_ann_streamy" class="link-icon">
+            <span>🎥</span>
+            <span class="link-label">Twitch</span>
+        </a>
+        <a href="https://www.patreon.com/hot_ann_streamy" class="link-icon">
+            <span>⭐</span>
+            <span class="link-label">Patreon</span>
+        </a>
+        <a href="https://www.youtube.com/channel/UCPefLFDiJRm1RJDVqZ5HklQ" class="link-icon">
+            <span>▶️</span>
+            <span class="link-label">YouTube</span>
+        </a>
+        <a href="https://throne.com/hot_ann_streamy" class="link-icon">
+            <span>👑</span>
+            <span class="link-label">Throne</span>
+        </a>
+        <a href="https://www.paypal.com/donate/?hosted_button_id=VQDGB7JBM6YWU" class="link-icon">
+            <span>💰</span>
+            <span class="link-label">PayPal</span>
+        </a>
+        <a href="https://kick.com/hot_ann_streamy" class="link-icon">
+            <span>🦵</span>
+            <span class="link-label">Kick</span>
+        </a>
+        <a href="https://discord.com/invite/yf35e5kBtc" class="link-icon">
+            <span>💬</span>
+            <span class="link-label">Discord</span>
+        </a>
+        <a href="https://www.instagram.com/hot_ann_streamy/" class="link-icon">
+            <span>📷</span>
+            <span class="link-label">Instagram</span>
+        </a>
+        <a href="https://www.tiktok.com/@hot_ann_streamy" class="link-icon">
+            <span>🎵</span>
+            <span class="link-label">TikTok</span>
+        </a>
+        <a href="https://x.com/Hot_Ann_Streamy" class="link-icon">
+            <span>🐦</span>
+            <span class="link-label">X</span>
+        </a>
     </div>
     <script>
-        // Optional extra troll: Random alert after 5 seconds
+        // Force video play with sound (browser hack - requires interaction, but we trigger on load)
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('rick-video');
+            video.muted = false;
+            video.play().catch(() => {
+                // If autoplay blocked, play on first interaction
+                document.addEventListener('click', () => video.play(), { once: true });
+            });
+        });
+
+        // Start all trolls on load
+        function startTrolls() {
+            startFlying(); // Already in CSS
+            startConfetti(); // Troll 3
+            startBackgroundFlash(); // Troll 4 (already in CSS)
+            startRandomReload(); // Troll 5
+            startCursorTrail(); // New troll 1
+            startFakeError(); // New troll 2
+        }
+
+        // Troll 1: Cursor trail of eggplants
+        function startCursorTrail() {
+            document.addEventListener('mousemove', (e) => {
+                const trail = document.createElement('div');
+                trail.className = 'flying-item';
+                trail.style.position = 'absolute';
+                trail.style.left = `${e.pageX}px`;
+                trail.style.top = `${e.pageY}px`;
+                trail.style.fontSize = '30px';
+                trail.textContent = '🍆';
+                trail.style.animation = 'fadeOut 2s forwards';
+                document.body.appendChild(trail);
+                setTimeout(() => trail.remove(), 2000);
+            });
+        }
+        // Add fadeOut animation
+        const style = document.createElement('style');
+        style.textContent = `@keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }`;
+        document.head.appendChild(style);
+
+        // Troll 2: Fake error messages popping up randomly
+        function startFakeError() {
+            setInterval(() => {
+                alert('Error: Your computer is now infected with Rick Roll virus! 😈');
+            }, 15000); // Every 15 seconds
+        }
+
+        // Troll 3: Confetti explosion on load
+        function startConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            for (let i = 0; i < 200; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.animationDelay = `${Math.random() * 3}s`;
+                piece.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confettiContainer.appendChild(piece);
+            }
+            // Add confetti animation
+            const confettiStyle = document.createElement('style');
+            confettiStyle.textContent = `
+                .confetti-piece {
+                    animation: confetti-fall 5s linear forwards;
+                }
+                @keyframes confetti-fall {
+                    0% { opacity: 1; transform: translateY(-100vh) rotate(0deg); }
+                    100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+                }
+            `;
+            document.head.appendChild(confettiStyle);
+        }
+
+        // Troll 4: Random page shakes
+        function startPageShake() {
+            setInterval(() => {
+                document.body.style.animation = 'shake 0.5s';
+                setTimeout(() => document.body.style.animation = '', 500);
+            }, 10000); // Every 10 seconds
+            const shakeStyle = document.createElement('style');
+            shakeStyle.textContent = `@keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); } 20%, 40%, 60%, 80% { transform: translateX(10px); } }`;
+            document.head.appendChild(shakeStyle);
+        }
+
+        // Troll 5: Invert colors randomly
+        function startColorInvert() {
+            setInterval(() => {
+                document.body.style.filter = 'invert(1)';
+                setTimeout(() => document.body.style.filter = '', 1000);
+            }, 20000); // Every 20 seconds for 1 second
+        }
+
+        // Extra 5 hilarious trolly things implemented:
+        // 1. Cursor trail of eggplants (already added)
+        // 2. Random fake error alerts (already added)
+        // 3. Confetti explosion on load (already added)
+        // 4. Page shakes randomly (implemented above)
+        // 5. Temporary color inversion (implemented above)
+
+        // Start extra trolls
+        startPageShake(); // Troll 4
+        startColorInvert(); // Troll 5
+
+        // Optional extra troll: Random alert after 5 seconds (original)
         setTimeout(() => {
             alert("You've been Rick Rolled! 😎");
         }, 5000);
