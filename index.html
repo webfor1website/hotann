@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wholesome Streamer OnlyFans</title>
+    <title>OnlyFans</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔞</text></svg>">
     <style>
         * {
             margin: 0;
@@ -15,10 +16,123 @@
             overflow: hidden;
             background-color: #000;
             color: #fff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             text-align: center;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="20" font-size="20">🍆</text></svg>'), auto;
             display: flex;
+        }
+        
+        /* FAKE ONLYFANS OVERLAY */
+        #onlyfans-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00AFF0 0%, #0084C7 100%);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .onlyfans-container {
+            background: white;
+            padding: 50px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            width: 90%;
+            filter: blur(8px);
+            opacity: 0.9;
+        }
+        
+        .onlyfans-logo {
+            font-size: 48px;
+            font-weight: 800;
+            color: #00AFF0;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        
+        .onlyfans-tagline {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 40px;
+        }
+        
+        .fake-input {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f9f9f9;
+        }
+        
+        .fake-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00AFF0, #0084C7);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        
+        .fake-oauth {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .fake-oauth-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: white;
+            color: #333;
+        }
+        
+        .click-hint {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            animation: pulse-hint 2s infinite;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes pulse-hint {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+        
+        /* REAL TROLL PAGE (hidden until click) */
+        #troll-page {
+            display: none;
+            width: 100%;
+            height: 100%;
         }
         
         .container {
@@ -26,7 +140,6 @@
             position: relative;
         }
         
-        /* PROFESSIONAL SIDEBAR STYLING */
         .sidebar {
             width: 320px;
             background: linear-gradient(180deg, rgba(10, 10, 15, 0.98) 0%, rgba(20, 20, 30, 0.95) 100%);
@@ -56,7 +169,6 @@
             border-right: none;
         }
         
-        /* SIDEBAR HEADER */
         .sidebar-header {
             background: linear-gradient(135deg, #ff1493, #ff69b4);
             padding: 25px 20px;
@@ -82,7 +194,6 @@
             padding: 20px;
         }
         
-        /* WEATHER CARDS */
         .weather-item {
             background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(0, 255, 200, 0.08));
             padding: 16px;
@@ -135,7 +246,6 @@
             filter: drop-shadow(0 2px 8px rgba(0, 212, 170, 0.4));
         }
         
-        /* NEWS CARDS */
         .news-item {
             margin-bottom: 14px;
             padding: 16px;
@@ -179,21 +289,6 @@
             box-shadow: 0 2px 8px rgba(255, 20, 147, 0.4);
         }
         
-        /* LOADING & STATUS */
-        .loading {
-            text-align: center;
-            padding: 30px;
-            color: #ff69b4;
-            font-style: italic;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        /* ELON LINKS SECTION */
         .elon-section {
             margin-top: 30px;
             padding-top: 20px;
@@ -240,7 +335,6 @@
             font-size: 14px;
         }
         
-        /* VIDEO BACKGROUND */
         .video-background {
             position: fixed;
             top: 0;
@@ -262,7 +356,6 @@
             transform: translate(-50%, -50%);
         }
         
-        /* MAIN CONTENT */
         .content {
             position: absolute;
             top: 50%;
@@ -294,7 +387,7 @@
             100% { color: red; }
         }
         
-        .fake-button {
+        .fake-button-main {
             margin-top: 20px;
             padding: 18px 40px;
             font-size: 24px;
@@ -308,13 +401,12 @@
             transition: all 0.3s;
         }
         
-        .fake-button:hover {
+        .fake-button-main:hover {
             background: linear-gradient(135deg, #ff1493, #ff69b4);
             transform: translateY(-3px);
             box-shadow: 0 8px 30px rgba(255, 20, 147, 0.7);
         }
         
-        /* FLYING ELEMENTS */
         .flying-elements {
             position: fixed;
             top: 0;
@@ -338,7 +430,6 @@
             100% { transform: rotate(360deg) translateY(0); }
         }
         
-        /* LOADING BAR */
         .loading-bar {
             position: fixed;
             top: 0;
@@ -356,7 +447,6 @@
             100% { width: 98%; }
         }
         
-        /* CONFETTI */
         .confetti {
             position: fixed;
             width: 100%;
@@ -385,7 +475,6 @@
             100% { opacity: 0; transform: translateY(120vh) rotate(1440deg); }
         }
         
-        /* BOTTOM LINKS */
         .links-section {
             position: fixed;
             bottom: 20px;
@@ -425,7 +514,6 @@
             text-shadow: 0 0 5px #000;
         }
         
-        /* BACKGROUND PULSE */
         body {
             animation: bg-pulse 8s infinite alternate;
         }
@@ -434,173 +522,158 @@
             0% { background-color: #000; }
             100% { background-color: #0a0a0f; }
         }
-        
-        /* CLICK OVERLAY */
-        #click-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-        
-        #click-prompt {
-            background: linear-gradient(135deg, #ff0000, #ff69b4, #ff8c00);
-            padding: 50px 70px;
-            border-radius: 25px;
-            font-size: 36px;
-            font-weight: 800;
-            color: white;
-            animation: pulse-scale 1.5s infinite;
-            box-shadow: 0 0 60px rgba(255, 0, 0, 0.9);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        @keyframes pulse-scale {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
     </style>
 </head>
-<body onload="loadWeatherAndNews()">
-    <div id="click-overlay" onclick="startEverything()">
-        <div id="click-prompt">
-            🎵 CLICK ANYWHERE TO START THE PARTY 🎵
+<body>
+    <!-- FAKE ONLYFANS OVERLAY (shows first) -->
+    <div id="onlyfans-overlay" onclick="revealTrollPage()">
+        <div class="onlyfans-container">
+            <div class="onlyfans-logo">OnlyFans</div>
+            <div class="onlyfans-tagline">Sign up to support your<br>favorite creators</div>
+            
+            <input type="text" class="fake-input" placeholder="Email" disabled>
+            <input type="password" class="fake-input" placeholder="Password" disabled>
+            
+            <button class="fake-button">LOG IN</button>
+            
+            <div class="fake-oauth">
+                <button class="fake-oauth-btn">
+                    <span>𝕏</span> SIGN IN WITH X
+                </button>
+                <button class="fake-oauth-btn">
+                    <span>G</span> SIGN IN WITH GOOGLE
+                </button>
+            </div>
+        </div>
+        
+        <div class="click-hint">
+            👆 Click anywhere to continue
         </div>
     </div>
 
+    <!-- HIDDEN AUDIO -->
     <audio id="rick-audio" loop preload="auto">
         <source src="https://ia800304.us.archive.org/34/items/NeverGonnaGiveYouUp/jocofullinterview41.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- LEFT SIDEBAR - Weather -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h3>🌤️ Live Weather</h3>
-        </div>
-        <div class="sidebar-content">
-            <div id="weather-container">
-                <div class="loading">Loading weather data...</div>
+    <!-- REAL TROLL PAGE (hidden until overlay clicked) -->
+    <div id="troll-page">
+        <!-- LEFT SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>🌤️ Live Weather</h3>
             </div>
-            
-            <div class="elon-section">
-                <h4>🚀 Elon's Empire</h4>
-                <a href="https://www.tesla.com" target="_blank" class="elon-link">
-                    <span>⚡</span>
-                    <span class="elon-link-text">Tesla</span>
+            <div class="sidebar-content">
+                <div id="weather-container"></div>
+                
+                <div class="elon-section">
+                    <h4>🚀 Elon's Empire</h4>
+                    <a href="https://www.tesla.com" target="_blank" class="elon-link">
+                        <span>⚡</span>
+                        <span class="elon-link-text">Tesla</span>
+                    </a>
+                    <a href="https://www.spacex.com" target="_blank" class="elon-link">
+                        <span>🚀</span>
+                        <span class="elon-link-text">SpaceX</span>
+                    </a>
+                    <a href="https://neuralink.com" target="_blank" class="elon-link">
+                        <span>🧠</span>
+                        <span class="elon-link-text">Neuralink</span>
+                    </a>
+                    <a href="https://x.ai" target="_blank" class="elon-link">
+                        <span>🤖</span>
+                        <span class="elon-link-text">xAI</span>
+                    </a>
+                    <a href="https://grok.x.ai" target="_blank" class="elon-link">
+                        <span>💬</span>
+                        <span class="elon-link-text">Grok</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="video-background">
+                <iframe id="rick-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1&playlist=dQw4w9WgXcQ&mute=1&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div class="content">
+                <p class="message">This streamer is TOO WHOLESOME for OnlyFans!</p>
+                <p class="eggplant">🍆</p>
+                <button class="fake-button-main" onclick="alert('Trolled! No OnlyFans here. Go watch some wholesome Twitch streams instead!')">Subscribe Now</button>
+            </div>
+            <div class="flying-elements">
+                <div class="flying-item" style="top:10%;left:15%;animation-duration:14s;">🍌🍌🍌</div>
+                <div class="flying-item" style="top:25%;left:40%;animation-duration:11s;">🐐 MEEEEEH</div>
+                <div class="flying-item" style="top:45%;left:65%;animation-duration:16s;">🤡🤡🤡</div>
+                <div class="flying-item" style="top:60%;left:25%;animation-duration:13s;">🤯💥</div>
+                <div class="flying-item" style="top:75%;left:80%;animation-duration:18s;">L + ratio</div>
+                <div class="flying-item" style="top:15%;left:55%;animation-duration:19s;">😾</div>
+                <div class="flying-item" style="top:85%;left:35%;animation-duration:15s;">skill issue</div>
+            </div>
+            <div class="loading-bar"></div>
+            <div class="confetti" id="confetti"></div>
+            <div class="links-section">
+                <a href="https://streamelements.com/hot_ann_streamy/tip" class="link-icon">
+                    <span>💸</span>
+                    <span class="link-label">Tip</span>
                 </a>
-                <a href="https://www.spacex.com" target="_blank" class="elon-link">
-                    <span>🚀</span>
-                    <span class="elon-link-text">SpaceX</span>
+                <a href="https://www.twitch.tv/hot_ann_streamy" class="link-icon">
+                    <span>🎥</span>
+                    <span class="link-label">Twitch</span>
                 </a>
-                <a href="https://neuralink.com" target="_blank" class="elon-link">
-                    <span>🧠</span>
-                    <span class="elon-link-text">Neuralink</span>
+                <a href="https://www.patreon.com/hot_ann_streamy" class="link-icon">
+                    <span>⭐</span>
+                    <span class="link-label">Patreon</span>
                 </a>
-                <a href="https://x.ai" target="_blank" class="elon-link">
-                    <span>🤖</span>
-                    <span class="elon-link-text">xAI</span>
+                <a href="https://www.youtube.com/channel/UCPefLFDiJRm1RJDVqZ5HklQ" class="link-icon">
+                    <span>▶️</span>
+                    <span class="link-label">YouTube</span>
                 </a>
-                <a href="https://grok.x.ai" target="_blank" class="elon-link">
+                <a href="https://throne.com/hot_ann_streamy" class="link-icon">
+                    <span>👑</span>
+                    <span class="link-label">Throne</span>
+                </a>
+                <a href="https://www.paypal.com/donate/?hosted_button_id=VQDGB7JBM6YWU" class="link-icon">
+                    <span>💰</span>
+                    <span class="link-label">PayPal</span>
+                </a>
+                <a href="https://kick.com/hot_ann_streamy" class="link-icon">
+                    <span>🦵</span>
+                    <span class="link-label">Kick</span>
+                </a>
+                <a href="https://discord.com/invite/yf35e5kBtc" class="link-icon">
                     <span>💬</span>
-                    <span class="elon-link-text">Grok</span>
+                    <span class="link-label">Discord</span>
+                </a>
+                <a href="https://www.instagram.com/hot_ann_streamy/" class="link-icon">
+                    <span>📷</span>
+                    <span class="link-label">Instagram</span>
+                </a>
+                <a href="https://www.tiktok.com/@hot_ann_streamy" class="link-icon">
+                    <span>🎵</span>
+                    <span class="link-label">TikTok</span>
+                </a>
+                <a href="https://x.com/Hot_Ann_Streamy" class="link-icon">
+                    <span>🐦</span>
+                    <span class="link-label">X</span>
                 </a>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="video-background">
-            <iframe id="rick-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&loop=1&playlist=dQw4w9WgXcQ&mute=1&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-        <div class="content">
-            <p class="message">This streamer is TOO WHOLESOME for OnlyFans!</p>
-            <p class="eggplant">🍆</p>
-            <button class="fake-button" onclick="alert('Trolled! No OnlyFans here. Go watch some wholesome Twitch streams instead!')">Subscribe Now</button>
-        </div>
-        <div class="flying-elements">
-            <div class="flying-item" style="top:10%;left:15%;animation-duration:14s;">🍌🍌🍌</div>
-            <div class="flying-item" style="top:25%;left:40%;animation-duration:11s;">🐐 MEEEEEH</div>
-            <div class="flying-item" style="top:45%;left:65%;animation-duration:16s;">🤡🤡🤡</div>
-            <div class="flying-item" style="top:60%;left:25%;animation-duration:13s;">🤯💥</div>
-            <div class="flying-item" style="top:75%;left:80%;animation-duration:18s;">L + ratio</div>
-            <div class="flying-item" style="top:15%;left:55%;animation-duration:19s;">😾</div>
-            <div class="flying-item" style="top:85%;left:35%;animation-duration:15s;">skill issue</div>
-        </div>
-        <div class="loading-bar"></div>
-        <div class="confetti" id="confetti"></div>
-        <div class="links-section">
-            <a href="https://streamelements.com/hot_ann_streamy/tip" class="link-icon">
-                <span>💸</span>
-                <span class="link-label">Tip</span>
-            </a>
-            <a href="https://www.twitch.tv/hot_ann_streamy" class="link-icon">
-                <span>🎥</span>
-                <span class="link-label">Twitch</span>
-            </a>
-            <a href="https://www.patreon.com/hot_ann_streamy" class="link-icon">
-                <span>⭐</span>
-                <span class="link-label">Patreon</span>
-            </a>
-            <a href="https://www.youtube.com/channel/UCPefLFDiJRm1RJDVqZ5HklQ" class="link-icon">
-                <span>▶️</span>
-                <span class="link-label">YouTube</span>
-            </a>
-            <a href="https://throne.com/hot_ann_streamy" class="link-icon">
-                <span>👑</span>
-                <span class="link-label">Throne</span>
-            </a>
-            <a href="https://www.paypal.com/donate/?hosted_button_id=VQDGB7JBM6YWU" class="link-icon">
-                <span>💰</span>
-                <span class="link-label">PayPal</span>
-            </a>
-            <a href="https://kick.com/hot_ann_streamy" class="link-icon">
-                <span>🦵</span>
-                <span class="link-label">Kick</span>
-            </a>
-            <a href="https://discord.com/invite/yf35e5kBtc" class="link-icon">
-                <span>💬</span>
-                <span class="link-label">Discord</span>
-            </a>
-            <a href="https://www.instagram.com/hot_ann_streamy/" class="link-icon">
-                <span>📷</span>
-                <span class="link-label">Instagram</span>
-            </a>
-            <a href="https://www.tiktok.com/@hot_ann_streamy" class="link-icon">
-                <span>🎵</span>
-                <span class="link-label">TikTok</span>
-            </a>
-            <a href="https://x.com/Hot_Ann_Streamy" class="link-icon">
-                <span>🐦</span>
-                <span class="link-label">X</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- RIGHT SIDEBAR - News -->
-    <div class="sidebar right">
-        <div class="sidebar-header">
-            <h3>📰 Top News</h3>
-        </div>
-        <div class="sidebar-content">
-            <div id="news-container">
-                <div class="loading">Loading latest news...</div>
+        <!-- RIGHT SIDEBAR -->
+        <div class="sidebar right">
+            <div class="sidebar-header">
+                <h3>📰 Top News</h3>
+            </div>
+            <div class="sidebar-content">
+                <div id="news-container"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // ==========================================
-        // FALLBACK DATA - ALL 11 CITIES
-        // ==========================================
-        
-        const FALLBACK_WEATHER = [
+        // Weather & News data
+        const WEATHER = [
             { name: 'New York', temp: 37, tempC: 3, condition: 'broken clouds', icon: '☁️' },
             { name: 'Los Angeles', temp: 73, tempC: 23, condition: 'clear sky', icon: '☀️' },
             { name: 'Chicago', temp: 38, tempC: 3, condition: 'clear sky', icon: '☀️' },
@@ -614,7 +687,7 @@
             { name: 'Las Vegas', temp: 71, tempC: 22, condition: 'clear sky', icon: '☀️' }
         ];
         
-        const FALLBACK_NEWS = [
+        const NEWS = [
             { title: "Tesla unveils new Cybertruck variant with extended 500-mile range capability", url: "https://www.tesla.com" },
             { title: "SpaceX Starship completes successful orbital refueling demonstration test", url: "https://www.spacex.com" },
             { title: "Neuralink patient successfully plays chess using only brain-computer interface", url: "https://neuralink.com" },
@@ -627,89 +700,14 @@
             { title: "NASA deep space mission discovers potential biosignatures on distant exoplanet", url: "#" }
         ];
         
-        // ==========================================
-        // WEATHER ICON MAPPING
-        // ==========================================
-        
-        function getWeatherIcon(condition) {
-            const c = condition.toLowerCase();
-            if (c.includes('clear') || c.includes('sunny')) return '☀️';
-            if (c.includes('cloud') && (c.includes('few') || c.includes('scattered'))) return '🌤️';
-            if (c.includes('cloud') && (c.includes('broken') || c.includes('overcast'))) return '☁️';
-            if (c.includes('rain') || c.includes('drizzle')) return '🌧️';
-            if (c.includes('thunder') || c.includes('storm')) return '⛈️';
-            if (c.includes('snow')) return '❄️';
-            if (c.includes('mist') || c.includes('fog') || c.includes('haze')) return '🌫️';
-            if (c.includes('partly')) return '⛅';
-            return '🌤️';
-        }
-        
-        // ==========================================
-        // LOAD DATA
-        // ==========================================
-        
-        async function loadWeatherAndNews() {
-            loadWeather();
-            loadNews();
+        function revealTrollPage() {
+            // Hide OnlyFans overlay
+            document.getElementById('onlyfans-overlay').style.display = 'none';
             
-            // Refresh every 10 minutes
-            setInterval(loadNews, 600000);
-            setInterval(loadWeather, 600000);
-        }
-        
-        // ==========================================
-        // WEATHER - SHOW ALL 11 CITIES
-        // ==========================================
-        
-        function loadWeather() {
-            const container = document.getElementById('weather-container');
-            let html = '';
+            // Show troll page
+            document.getElementById('troll-page').style.display = 'flex';
             
-            // Just use fallback data (APIs not working consistently)
-            FALLBACK_WEATHER.forEach(weather => {
-                html += `
-                    <div class="weather-item">
-                        <div class="weather-left">
-                            <div class="weather-city">${weather.name}</div>
-                            <div class="weather-temp">${weather.temp}°F / ${weather.tempC}°C</div>
-                            <div class="weather-condition">${weather.condition}</div>
-                        </div>
-                        <div class="weather-icon">${weather.icon}</div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
-        
-        // ==========================================
-        // NEWS - TOP 10 STORIES
-        // ==========================================
-        
-        function loadNews() {
-            const container = document.getElementById('news-container');
-            let html = '';
-            
-            // Use fallback news (NewsAPI requires HTTPS)
-            FALLBACK_NEWS.forEach((news, index) => {
-                html += `
-                    <div class="news-item">
-                        <span class="news-number">${index + 1}</span>
-                        <a href="${news.url}" target="_blank">${news.title}</a>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
-        
-        // ==========================================
-        // RICK ROLL & TROLLS
-        // ==========================================
-        
-        function startEverything() {
-            document.getElementById('click-overlay').style.display = 'none';
-            
+            // Start Rick Roll
             const audio = document.getElementById('rick-audio');
             audio.volume = 0.8;
             audio.play().then(() => {
@@ -718,9 +716,42 @@
                 setTimeout(() => audio.play(), 100);
             });
             
+            // Load content
+            loadWeather();
+            loadNews();
             startTrolls();
         }
-
+        
+        function loadWeather() {
+            let html = '';
+            WEATHER.forEach(w => {
+                html += `
+                    <div class="weather-item">
+                        <div class="weather-left">
+                            <div class="weather-city">${w.name}</div>
+                            <div class="weather-temp">${w.temp}°F / ${w.tempC}°C</div>
+                            <div class="weather-condition">${w.condition}</div>
+                        </div>
+                        <div class="weather-icon">${w.icon}</div>
+                    </div>
+                `;
+            });
+            document.getElementById('weather-container').innerHTML = html;
+        }
+        
+        function loadNews() {
+            let html = '';
+            NEWS.forEach((news, i) => {
+                html += `
+                    <div class="news-item">
+                        <span class="news-number">${i + 1}</span>
+                        <a href="${news.url}" target="_blank">${news.title}</a>
+                    </div>
+                `;
+            });
+            document.getElementById('news-container').innerHTML = html;
+        }
+        
         function startTrolls() {
             startConfetti();
             startCursorTrail();
